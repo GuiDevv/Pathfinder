@@ -29,10 +29,11 @@ public class MazeGenerator : MonoBehaviour
 { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0 }
  };
 
-Positions[,] mazePos = new Positions[0, 0];
     public List<GameObject> tileset = new List<GameObject>();
-
     Queue<Positions> pathInverted = new Queue<Positions>();
+    Queue<Vector3> pathPosition = new Queue<Vector3>();
+    public Movement ratMovement;
+
     float tileWidth = 3.0f;
     float tileDepth = 3.0f;
 
@@ -81,7 +82,7 @@ Positions[,] mazePos = new Positions[0, 0];
         //    for (int j = 0; j < mazeWidth; j++) //x
         //    {
         //        if (maze[i, j] > 1)
-        //        {                   
+        //        {
         //            GameObject tilePrefab = tileset[maze[i, j]];
         //            Vector3 p = tilePrefab.transform.position;
         //            p.x = xi + j * tileWidth;
@@ -93,15 +94,18 @@ Positions[,] mazePos = new Positions[0, 0];
 
         while (path.Count != 0)
         {
-            Debug.Log(path.Peek().pos);
+            //Debug.Log(path.Peek().pos);
             GameObject tilePrefab = tileset[maze[path.Peek().pos.x, path.Peek().pos.y]];
             Vector3 p = tilePrefab.transform.position;
             p.x = xi + path.Peek().pos.y * tileWidth;
             p.z = zi - path.Peek().pos.x * tileDepth;
-            GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+            pathPosition.Enqueue(p);
+            //GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
             path.Dequeue();
         }
 
+        ratMovement.pathPosition = pathPosition;
+        ratMovement.ready = true;
     }
 
     void PathFinding(Vector2Int begin, Vector2Int end)
@@ -136,7 +140,11 @@ Positions[,] mazePos = new Positions[0, 0];
             {
                 ending.Peek().backingMap(ending, maze, mazeWidth, mazeDepth);
                 pathInverted.Enqueue(ending.Peek());
-            }            
+            }          
+            else
+            {
+                pathInverted.Enqueue(ending.Peek());
+            }
             ending.Dequeue();
         }
 

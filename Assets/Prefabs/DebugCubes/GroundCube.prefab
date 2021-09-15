@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1903599643860506405}
   - component: {fileID: 7698617031936397864}
   m_Layer: 0
-  m_Name: GreenCube
+  m_Name: GroundCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

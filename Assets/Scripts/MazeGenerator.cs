@@ -33,10 +33,10 @@ public class MazeGenerator : MonoBehaviour
     Queue<Positions> pathInverted = new Queue<Positions>();
     Queue<Vector3> pathPosition = new Queue<Vector3>();
     public Movement ratMovement;
+    public bool drawDebugPath, drawDebugBFS;
 
     float tileWidth = 3.0f;
     float tileDepth = 3.0f;
-
     float xi = -25.0f;
     float zi = 25.0f;
 
@@ -76,31 +76,18 @@ public class MazeGenerator : MonoBehaviour
             path.Enqueue(stack.Pop());
         }
 
-        //Debug de todo o caminho
-        //for (int i = 0; i < mazeDepth; i++) //z
-        //{
-        //    for (int j = 0; j < mazeWidth; j++) //x
-        //    {
-        //        if (maze[i, j] > 1)
-        //        {
-        //            GameObject tilePrefab = tileset[maze[i, j]];
-        //            Vector3 p = tilePrefab.transform.position;
-        //            p.x = xi + j * tileWidth;
-        //            p.z = zi - i * tileDepth;
-        //            GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
-        //        }
-        //    }
-        //}
+        if (drawDebugBFS)
+            drawBreadthFirstSearch();
 
         while (path.Count != 0)
         {
-            //Debug.Log(path.Peek().pos);
             GameObject tilePrefab = tileset[maze[path.Peek().pos.x, path.Peek().pos.y]];
             Vector3 p = tilePrefab.transform.position;
             p.x = xi + path.Peek().pos.y * tileWidth;
             p.z = zi - path.Peek().pos.x * tileDepth;
             pathPosition.Enqueue(p);
-            //GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+            if (drawDebugPath)
+                drawPath(tilePrefab, p);
             path.Dequeue();
         }
 
@@ -149,6 +136,29 @@ public class MazeGenerator : MonoBehaviour
         }
 
 
+    }
+
+    void drawBreadthFirstSearch()
+    {
+        for (int i = 0; i < mazeDepth; i++) //z
+        {
+            for (int j = 0; j < mazeWidth; j++) //x
+            {
+                if (maze[i, j] > 1)
+                {
+                    GameObject tilePrefab = tileset[maze[i, j]];
+                    Vector3 p = tilePrefab.transform.position;
+                    p.x = xi + j * tileWidth;
+                    p.z = zi - i * tileDepth;
+                    GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
+                }
+            }
+        }
+    }
+
+    void drawPath(GameObject tilePrefab, Vector3 p)
+    {
+        GameObject newTile = Instantiate(tilePrefab, p, Quaternion.identity) as GameObject;
     }
 
     // Update is called once per frame

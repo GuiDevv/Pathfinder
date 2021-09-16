@@ -265,6 +265,9 @@ MonoBehaviour:
   - {fileID: 3613512223699540740, guid: bd9eec7e50dbddb4da492a25d5e73dc4, type: 3}
   - {fileID: 3613512223699540740, guid: 6c64ee18622d1cb45a3bde39ded36045, type: 3}
   - {fileID: 3613512223699540740, guid: 65fb6bd962be79d4bb9dfcbe3926a17e, type: 3}
+  ratMovement: {fileID: 894145941}
+  drawDebugPath: 0
+  drawDebugBFS: 0
 --- !u!4 &614181093
 Transform:
   m_ObjectHideFlags: 0
@@ -340,6 +343,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4285c5f54f680f48ae19562989a47f6, type: 3}
+--- !u!1 &894145939 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 10434475094015337, guid: 38af989e3fa310d44afd094ab6c68823, type: 3}
+  m_PrefabInstance: {fileID: 1142874065}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &894145941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894145939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 119985b98fb0d614fbcf87dc6064acb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ready: 0
+  speed: 1
 --- !u!1 &1056979439
 GameObject:
   m_ObjectHideFlags: 0
@@ -493,8 +515,8 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 929003522170329840, guid: 38af989e3fa310d44afd094ab6c68823, type: 3}
     - {fileID: 929003522170329845, guid: 38af989e3fa310d44afd094ab6c68823, type: 3}
+    - {fileID: 929003522170329840, guid: 38af989e3fa310d44afd094ab6c68823, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 38af989e3fa310d44afd094ab6c68823, type: 3}
 --- !u!1 &2081528882
 GameObject:
